@@ -69,14 +69,14 @@ exports.authenticate = async (req, res, next) => {
             email: customer.email,
             name: customer.name,
             roles: customer.roles
-
         });
 
         res.status(201).send({
             token: token,
             data: {
                 email: customer.email,
-                name: customer.name
+                name: customer.name,
+                roles: customer.roles
             }
         });
     } catch (e) {
@@ -122,29 +122,3 @@ exports.refreshToken = async (req, res, next) => {
     }
 }
 
-exports.isAdmin = function (req, res, next) {
-    var token = req.body.token || req.query.token || req.headers['x-acess-token'];
-
-
-    if (!token) {
-        res.status(401).json({
-            message: 'Token invalido'
-        });
-    } else {
-        jwt.verify(token, global.SALT_KEY, function (errir, decoded) {
-            if (error) {
-                res.status(401).json({
-                    message: 'Token Invalido'
-                });
-            } else {
-                if (decoded.roles.includes('admin')) {
-                    next();
-                } else {
-                    res.status(403).json({
-                        message: 'Esta funcionalidade é restrita a administradores'
-                    });
-                }
-            }
-        });
-    }
-}

@@ -20,8 +20,18 @@ const productRoute = require('./routes/productRoute');
 const customerRoute = require('./routes/customerRoute');
 const orderRoute = require('./routes/orderRoute');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json({
+    limit: '5mb'
+}));
+app.use(bodyParser.urlencoded({ extended: false }));
+
+//Habulita o CORS
+app.use(function(req, res, next){
+    res.header('Acess-Control-Allow-Origin', '*');
+    res.header('Acess-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Acept, x-acess-token');
+    res.header('Acess-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    next();
+});
 
 app.use('/', indexRoute);
 app.use('/products', productRoute);

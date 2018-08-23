@@ -6,19 +6,19 @@ const schema = new Schema({
         type: String,
         required: true
     },
-    email:{
+    email: {
         type: String,
-        required:true
+        required: true
     },
-    password:{
+    password: {
         type: String,
-        required:true
+        required: true
     },
-    roles:[{
+    roles: [{
         type: String,
         required: true,
         enum: ['user', 'admin'],
-        default:'user'
+        default: 'user'
     }],
 });
 module.exports = mongoose.model('customer', schema);

@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
-    customer:{
+    customer: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:'customer'
+        ref: 'customer'
     },
 
     number: {
@@ -12,33 +12,33 @@ const schema = new Schema({
         required: true
     },
 
-    creatDate:{
+    creatDate: {
         type: Date,
         required: true,
-        default : Date.now
+        default: Date.now
     },
 
-    status:{
+    status: {
         type: String,
         required: true,
-        enum :['created', 'done'],
+        enum: ['created', 'done'],
         default: 'created'
     },
-   
-    items:[{
+
+    items: [{
         quantity: {
             type: Number,
             required: true,
             default: 1
         },
-        price:{
+        price: {
             type: Number,
             required: true
         },
-        product:{
+        product: {
             type: mongoose.Schema.Types.ObjectId,
-        ref:'product'
+            ref: 'product'
         }
-    }]     
+    }]
 });
 module.exports = mongoose.model('order', schema);

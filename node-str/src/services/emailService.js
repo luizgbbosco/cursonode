@@ -3,7 +3,7 @@
 
  exports.send = async(to, subject, body) => {
      sendgrid.send({
-         to : req.body.email,
+         to : to,
          from : 'luizgbbosco@gmail.com',
          subject : subject,
          html: body
